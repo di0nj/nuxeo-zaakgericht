@@ -6,7 +6,10 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Capgemini
 Bundle-Version: 0.0.1.qualifier
 Nuxeo-Component: OSGI-INF/zaakgericht-actions.xml,
+    OSGI-INF/zaakgericht-chains.xml,
+    OSGI-INF/zaakgericht-handlers.xml,
     OSGI-INF/zaakgericht-types.xml,
-    OSGI-INF/zaakgericht-ui-types.xml
+    OSGI-INF/zaakgericht-ui-types.xml,
+    OSGI-INF/zaakgericht-workflow.xml
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: com.capgemini.nuxeo.zaakgericht

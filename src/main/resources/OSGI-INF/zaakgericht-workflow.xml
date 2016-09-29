@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<component name="com.capgemini.nuxeo.zaakgericht.workflow">
+    <extension target="org.nuxeo.ecm.platform.routing.service" point="routeModelImporter">
+        <template-resource id="case-management-workflow" path="data/case-management-workflow.zip"/>
+    </extension>
+    
+    <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager" point="layouts">
+        <layout name="Task666@taskLayout">
+            <templates>
+                <template mode="any">/layouts/zaakgericht_layout_template.xhtml</template>
+            </templates>
+            <rows>
+                <row>
+                    <properties mode="any">
+                        <property name="nxl_colspan_0">1</property>
+                    </properties>
+                    <widget>assignee</widget>
+                </row>
+                <row>
+                    <properties mode="any">
+                        <property name="nxl_colspan_0">1</property>
+                    </properties>
+                    <widget/>
+                </row>
+                <row>
+                    <properties mode="any">
+                        <property name="nxl_colspan_0">1</property>
+                    </properties>
+                    <widget/>
+                </row>
+            </rows>
+            <widget name="assignee" type="singleUserSuggestion">
+                <labels>
+                    <label mode="any">label.workflow.assignee</label>
+                </labels>
+                <helpLabels>
+                    <label mode="any">label.workflow.assignee.description</label>
+                </helpLabels>
+                <translated>true</translated>
+                <fields>
+                    <field>['assignee']</field>
+                </fields>
+            </widget>
+        </layout>
+        <layout name="TaskTab@tabLayout">
+            <templates>
+                <template mode="any">/layouts/zaakgericht_layout_template.xhtml</template>
+            </templates>
+            <rows>
+                <row>
+                    <widget>container</widget>
+                </row>
+            </rows>
+            <widget name="container" type="container">
+                <labels>
+                    <label mode="any"></label>
+                </labels>
+                <translated>false</translated>
+                <fields>
+                    <field></field>
+                </fields>
+                <controls mode="any">
+                    <control name="handleLabels">true</control>
+                    <control name="gridStyleClass">gridStyle12</control>
+                </controls>
+                <subWidgets>
+                    <widget name="sub0" type="summary_current_document_single_tasks">
+                        <labels>
+                            <label mode="any"></label>
+                        </labels>
+                        <translated>true</translated>
+                        <controls mode="any">
+                            <control name="handleLabels">true</control>
+                        </controls>
+                    </widget>
+                </subWidgets>
+            </widget>
+        </layout>
+    </extension>
+    
+    <extension target="org.nuxeo.ecm.core.schema.TypeService" point="doctype">
+        <facet name="facet-var_global_Task666">
+            <schema name="var_global_Task666"/>
+        </facet>
+        <facet name="facet-var_Task666">
+            <schema name="var_Task666"/>
+        </facet>
+        <facet name="facet-var_Task773">
+            <schema name="var_Task773"/>
+        </facet>
+        <facet name="facet-var_Taska3e">
+            <schema name="var_Taska3e"/>
+        </facet>
+        <facet name="facet-var_case-management-workflow">
+            <schema name="var_case-management-workflow"/>
+        </facet>
+    </extension>
+    
+    <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema">
+        <schema name="var_global_Task666" prefix="var_global_Task666" override="true" src="data/schemas/var_global_Task666.xsd"/>
+        <schema name="var_Task666" prefix="var_Task666" override="true" src="data/schemas/var_Task666.xsd"/>
+        <schema name="var_Task773" prefix="var_Task773" override="true" src="data/schemas/var_Task773.xsd"/>
+        <schema name="var_Taska3e" prefix="var_Taska3e" override="true" src="data/schemas/var_Taska3e.xsd"/>
+        <schema name="var_case-management-workflow" prefix="var_case-management-workflow" override="true" src="data/schemas/var_case-management-workflow.xsd"/>
+    </extension>
+    
+    <extension target="org.nuxeo.ecm.platform.actions.ActionService" point="filters">
+        <filter id="filter@wf@case-management-workflow">
+            <rule grant="true">
+                <permission>Write</permission>
+                <type>Case</type>
+            </rule>
+        </filter>
+    </extension>
+</component>

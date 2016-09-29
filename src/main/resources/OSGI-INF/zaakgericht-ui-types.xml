@@ -3,7 +3,6 @@
  
     <extension target="org.nuxeo.ecm.platform.types.TypeService" point="types">
  
-      
         <type id="CaseRoot">
             <label>CaseRoot</label>
             <description>CaseRoot.description</description>

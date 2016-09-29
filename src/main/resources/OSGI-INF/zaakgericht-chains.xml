@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="com.capgemini.nuxeo.zaakgericht.operationservicecomponent.chains">
+<extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="chains">
+    <chain id="start-case-management-chain">
+      <operation id="Context.StartWorkflow">
+        <param type="string" name="id">case-management-workflow</param>
+        <param type="boolean" name="start">true</param>
+        <param type="properties" name="variables">expr:assignee=@{CurrentUser.name}</param>
+      </operation>
+    </chain>
+  </extension>
+</component>

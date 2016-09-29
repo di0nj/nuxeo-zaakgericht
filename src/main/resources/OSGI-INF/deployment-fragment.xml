@@ -12,6 +12,8 @@
         <mkdir path="${bundle.fileName}.tmp" />
         <unzip from="${bundle.fileName}" to="${bundle.fileName}.tmp" />
         
+        <copy from="${bundle.fileName}.tmp/data" to="/"/>
+        
         <append from="${bundle.fileName}.tmp/OSGI-INF/l10n/messages_en.properties"
           to="nuxeo.war/WEB-INF/classes/messages.properties" addNewLine="true" />
         <append from="${bundle.fileName}.tmp/OSGI-INF/l10n/messages_en.properties"

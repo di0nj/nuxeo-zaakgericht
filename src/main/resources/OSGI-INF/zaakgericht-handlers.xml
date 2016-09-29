@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="com.capgemini.nuxeo.zaakgericht.event.handlers">
+
+<extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="event-handlers">
+    <handler chainId="start-case-management-chain">
+      <event>documentCreated</event>
+      <filters>
+        <doctype>Case</doctype>
+      </filters>
+    </handler>
+  </extension>
+</component>

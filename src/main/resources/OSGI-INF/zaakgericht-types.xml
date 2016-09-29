@@ -11,5 +11,21 @@
             <schema name="common"/>
             <schema name="dublincore"/>
         </doctype>
+        
+        <facet name="facet-var_global_Task666">
+            <schema name="var_global_Task666"/>
+        </facet>
+        <facet name="facet-var_Task666">
+            <schema name="var_Task666"/>
+        </facet>
+        <facet name="facet-var_Task773">
+            <schema name="var_Task773"/>
+        </facet>
+        <facet name="facet-var_Taska3e">
+            <schema name="var_Taska3e"/>
+        </facet>
+        <facet name="facet-var_case-management-workflow">
+            <schema name="var_case-management-workflow"/>
+        </facet>
     </extension>
 </component>
