@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<component name="com.capgemini.nuxeo.zaakgericht.actionservice.actions">
+    
+    <extension target="org.nuxeo.ecm.platform.actions.ActionService" point="actions">
+        <action icon="/icons/action_add.gif" id="newCase" label="command.create.case" link="#{documentActions.createDocument('Case')}">
+            <category>SUBVIEW_UPPER_LIST</category>
+            <filter id="newCase">
+                <rule grant="true">
+                    <type>CaseRoot</type>
+                </rule>
+            </filter>
+        </action>
+    </extension>
+    
+</component>
