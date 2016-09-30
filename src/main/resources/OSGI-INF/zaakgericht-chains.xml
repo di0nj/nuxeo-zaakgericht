@@ -1,12 +1,30 @@
 <?xml version="1.0"?>
 <component name="com.capgemini.nuxeo.zaakgericht.operationservicecomponent.chains">
-<extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="chains">
-    <chain id="start-case-management-chain">
-      <operation id="Context.StartWorkflow">
-        <param type="string" name="id">case-management-workflow</param>
-        <param type="boolean" name="start">true</param>
-        <param type="properties" name="variables">expr:assignee=@{CurrentUser.name}</param>
-      </operation>
-    </chain>
-  </extension>
+    <extension target="org.nuxeo.ecm.core.operation.OperationServiceComponent" point="chains">
+        <chain id="start-case-management-chain">
+            <!-- Retieve new Id (from UIDCase) for the Case -->
+            <operation id="Context.SetVar">
+                <param name="name" type="string">newId</param>
+                <param name="value" type="string">expr:@{Fn.getNextId("UIDCase")}</param>
+            </operation>
+            <!-- Set property -->
+            <operation id="Document.SetProperty">
+                <param type="string" name="xpath">dc:title</param>
+                <param type="boolean" name="save">true</param>
+                <param type="serializable" name="value">expr:Context["newId"]</param>
+            </operation>
+            <!-- Set property -->
+            <operation id="Document.SetProperty">
+                <param type="string" name="xpath">cs:number</param>
+                <param type="boolean" name="save">true</param>
+                <param type="serializable" name="value">expr:Context["newId"]</param>
+            </operation>
+            <!-- Start the workflow -->
+            <operation id="Context.StartWorkflow">
+                <param type="string" name="id">case-management-workflow</param>
+                <param type="boolean" name="start">true</param>
+                <param type="properties" name="variables">expr:assignee=@{CurrentUser.name}</param>
+            </operation>
+        </chain>
+    </extension>
 </component>

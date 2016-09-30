@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <component name="com.capgemini.nuxeo.zaakgericht.typeservice.doctype">
  
+    <!-- Types -->
     <extension target="org.nuxeo.ecm.core.schema.TypeService" point="doctype">
         <doctype name="CaseRoot" extends="Folder">
             <schema name="common"/>
@@ -10,22 +11,120 @@
         <doctype name="Case" extends="Folder">
             <schema name="common"/>
             <schema name="dublincore"/>
+            <schema name="case"/>
         </doctype>
-        
-        <facet name="facet-var_global_Task666">
-            <schema name="var_global_Task666"/>
-        </facet>
-        <facet name="facet-var_Task666">
-            <schema name="var_Task666"/>
-        </facet>
-        <facet name="facet-var_Task773">
-            <schema name="var_Task773"/>
-        </facet>
-        <facet name="facet-var_Taska3e">
-            <schema name="var_Taska3e"/>
-        </facet>
-        <facet name="facet-var_case-management-workflow">
-            <schema name="var_case-management-workflow"/>
-        </facet>
+    </extension>
+    
+    <!-- Types (UI) -->
+    <extension target="org.nuxeo.ecm.platform.types.TypeService" point="types">
+        <type id="CaseRoot">
+            <label>CaseRoot</label>
+            <description>CaseRoot.description</description>
+            <icon>icons/folder.gif</icon>
+            <bigIcon>icons/folder_100.png</bigIcon>
+            <category>CaseManagement</category>
+            <default-view>view_documents</default-view>
+            <subtypes>
+                <type>Case</type>
+            </subtypes>
+            <layouts mode="any">
+                <layout>heading</layout>
+            </layouts>
+            <layouts mode="edit">
+                <layout>heading</layout>
+                <layout>dublincore</layout>
+            </layouts>
+            <contentViews category="content">
+                <contentView>document_content</contentView>
+            </contentViews>
+            <contentViews category="trash_content">
+                <contentView showInExportView="false">
+                    document_trash_content
+                </contentView>
+            </contentViews>
+        </type>
+    
+        <type id="Case">
+            <label>Case</label>
+            <description>Case.description</description>
+            <icon>icons/folder.gif</icon>
+            <bigIcon>icons/folder_100.png</bigIcon>
+            <category>CaseManagement</category>
+            <default-view>view_documents</default-view>
+            <subtypes>
+                <type>Folder</type>
+                <type>Document</type>
+            </subtypes>
+            <layouts mode="any">
+                <layout>case-layout</layout>
+            </layouts>
+            <layouts mode="edit">
+                <layout>case-layout</layout>
+            </layouts>
+            <contentViews category="content">
+                <contentView>document_content</contentView>
+            </contentViews>
+            <contentViews category="trash_content">
+                <contentView showInExportView="false">
+                    document_trash_content
+                </contentView>
+            </contentViews>
+        </type>
+    
+        <!-- We would like to create a CaseRoot under Domain -->
+        <type id="Domain">
+            <subtypes>
+                <type>CaseRoot</type>
+            </subtypes>
+        </type>
+    
+        <!-- For testing purposes we allow creation under Workspaces -->
+        <type id="Workspace">
+            <subtypes>
+                <type>CaseRoot</type>
+            </subtypes>
+        </type>
+    </extension>
+    
+    <!-- Schemas -->
+    <extension target="org.nuxeo.ecm.core.schema.TypeService" point="schema" >
+        <schema name="case" prefix="cs" src="data/schemas/case.xsd"/>
+    </extension>
+    
+    <!-- Layout -->
+    <extension target="org.nuxeo.ecm.platform.forms.layout.WebLayoutManager" point="layouts">
+        <layout name="case-layout">
+            <templates>
+                <template mode="any">
+                    /layouts/layout_default_template.xhtml
+                </template>
+            </templates>
+            <properties mode="any">
+                <property name="foo">bar</property>
+            </properties>
+            <rows>
+                <row>
+                    <widget>case-number</widget>
+                </row>
+                <row>
+                    <widget>case-subject</widget>
+                </row>
+            </rows>
+            <widget name="case-subject" type="text">
+                <labels>
+                    <label mode="any">Case.subject</label>
+                </labels>
+                <translated>true</translated>
+                <fields>
+                    <field>cs:subject</field>
+                </fields>
+                <properties mode="edit">
+                    <property name="required">true</property>
+                </properties>
+                <properties mode="create">
+                    <property name="required">true</property>
+                </properties>
+            </widget>
+        </layout>
     </extension>
 </component>
